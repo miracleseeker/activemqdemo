@@ -24,21 +24,16 @@
 		<property name="jmsTemplate" ref="jmsTemplate"></property>
 	</bean>
 
-	<!-- 发送消息的目的地 (topic) -->
 	<bean id="topicDest" class="org.apache.activemq.command.ActiveMQTopic">
-		<!-- 设置消息队列的名字 -->
 		<constructor-arg index="0" value="myTopic" />
 	</bean>
 
-	<!-- 配置TopicJMS模版 -->
 	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory"></property>
 		<property name="defaultDestination" ref="topicDest" />
 	</bean>
 
-	<!-- 配置是否为发布订阅者模式，默认为false -->
-	<property name="pubSubDomain" value="true" />
-	<property name="receiveTimeout" value="10000" />
+	
 
 	<bean id="publisherService" class="com.mike.topic.serviceImpl.PublisherServiceImpl">
 		<property name="jmsTemplate" ref="jmsTopicTemplate"></property>
